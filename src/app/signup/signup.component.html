@@ -1,0 +1,67 @@
+<div class="login-page">
+    <div class="login-body">
+      <mat-card>
+        <div class="login-content">
+          <mat-card-header>
+            <mat-card-title class="hello">Hi Will-N!</mat-card-title>
+            <mat-card-subtitle>I have an account? <a href="#" routerLink="/login">Login</a></mat-card-subtitle>
+          </mat-card-header>
+          <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit(loginFormGroup.value)" class="form">
+            
+            <label>User Name *</label>
+            <mat-form-field class="form-element" appearance="outline">
+              <input matInput placeholder="User Name" name="username" formControlName="username">
+              <mat-error *ngIf="!loginFormGroup.controls['username'].valid && loginFormGroup.controls['username'].touched">
+              {{ getErrorEmail('email') }}
+              </mat-error>
+            </mat-form-field>
+
+            <label>Email *</label>
+            <mat-form-field class="form-element" appearance="outline">
+              <input matInput placeholder="Email" name="email" formControlName="email">
+              <mat-error *ngIf="!loginFormGroup.controls['email'].valid && loginFormGroup.controls['email'].touched">
+              {{ getErrorEmail('email') }}
+              </mat-error>
+            </mat-form-field>
+
+            <label>Mobile Number *</label>
+            <mat-form-field class="form-element" appearance="outline">
+              <input matInput placeholder="Mobile Number" name="mobilenumber" formControlName="mobilenumber">
+              <mat-error *ngIf="!loginFormGroup.controls['mobilenumber'].valid && loginFormGroup.controls['mobilenumber'].touched">
+                  valid mobilenumber
+              </mat-error>
+            </mat-form-field>
+
+            <label>Gender *</label>
+            <mat-form-field class="form-element" appearance="outline">
+              <mat-label>Gender *</mat-label>
+              <mat-select formControlName="gender" name="gender">
+                <mat-option *ngFor="let g of gender" [value]="g.value">
+                  {{g.view}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="!loginFormGroup.controls['gender'].valid && loginFormGroup.controls['gender'].touched">
+                  valid mobilenumber
+              </mat-error>
+            </mat-form-field>
+
+            <label>Password *</label>
+            <mat-form-field class="form-element" appearance="outline">
+              <input matInput placeholder="Password" name="password" [type]="hide ? 'password' : 'text'" formControlName="password">
+              <button mat-icon-button matSuffix (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="!loginFormGroup.controls['password'].valid && loginFormGroup.controls['password'].touched">
+                {{ getErrorPassword() }}
+              </mat-error>
+            </mat-form-field>
+            
+            <div class="form-element">
+              <button mat-raised-button type="submit" color="primary" class="button" [disabled]="!loginFormGroup.valid">Sign Up</button>
+            </div>
+    
+          </form>
+        </div>
+      </mat-card>
+    </div>
+  </div>

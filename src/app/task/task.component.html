@@ -1,0 +1,9 @@
+<!-- {{task | async | json}}/ -->
+
+<div class="column" *ngIf="task | async as tasks">
+    <h1>Task Name :{{ tasks.name }}</h1>
+    <h1>Task Description :{{ tasks.description }}</h1>
+    <h1>Task Assigned :{{ tasks.assignto | assignto }}</h1>
+    <h1>Task Start Date :{{ tasks.start | date:'long' }}</h1>
+    <h1>Task End Date :{{ tasks.end | date:'long' }}</h1>
+</div>

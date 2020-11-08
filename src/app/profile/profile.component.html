@@ -1,0 +1,21 @@
+<div class="card-width">
+    <mat-card *ngIf="auth.user as user">
+        <div class="row place-center">
+            <div class="upload-btn-wrapper">
+                <ng-container *ngIf="user?.profilepic; else propPic">
+                    <img [src]="user?.profilepic" alt="profile" class="profile">
+                </ng-container>
+                <ng-template #propPic>
+                    <img [src]="user?.gender == 'male' ? 'assets/boy.png' : 'assets/girl.jpg'" alt="profile" class="profile">
+                </ng-template>
+                <input type="file" name="myfile" (change)="updatePic($event)"/>
+            </div>
+        </div>
+        <h1>{{ user.username }}</h1>
+        <h2>{{ user.email }}</h2>
+        <p>Gender :{{ user.gender }}</p>
+        <p>Mobile No: {{ user.mobilenumber }}</p>
+        <p>Created On: {{ user.created | date }}</p>
+        <p>Updated On: {{ user.updated | date }}</p>
+    </mat-card>
+</div>

@@ -1,0 +1,62 @@
+<div class="row">
+    <!-- <img src="assets/add_tasks.svg" alt=""> -->
+    <div class="card-width">
+        <mat-card>
+            <form [formGroup]="taskFormGroup" (ngSubmit)="onSubmit(taskFormGroup.value)" class="form">
+            
+                <label>Task Name *</label>
+                <mat-form-field class="form-element" appearance="outline">
+                    <input matInput placeholder="Task Name" name="name" formControlName="name">
+                    <mat-error *ngIf="!taskFormGroup.controls['name'].valid && taskFormGroup.controls['name'].touched">
+                        Enter valid task Name
+                    </mat-error>
+                </mat-form-field>
+            
+                <label>Task Description *</label>
+                <mat-form-field class="form-element" appearance="outline">
+                    <textarea matInput placeholder="Task Description" cdkTextareaAutosize
+                    cdkAutosizeMinRows="6"
+                    cdkAutosizeMaxRows="5" name="description" formControlName="description"></textarea>
+                    <mat-error *ngIf="!taskFormGroup.controls['description'].valid && taskFormGroup.controls['description'].touched">
+                        Enter valid task description
+                    </mat-error>
+                </mat-form-field>
+            
+                <div class="row column-md">
+                    <div>
+                        <label>Task Start Date</label>
+                        <mat-form-field appearance="outline" class="form-element">
+                            <mat-label>Task Start Date</mat-label>
+                            <input matInput [min]="startMinDate" (dateChange)="addEvent($event)" [matDatepicker]="dp3"  formControlName="start" disabled>
+                            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="m-l-10 m-l-10-md">
+                        <label>Task End Date</label>
+                        <mat-form-field appearance="outline"class="form-element">
+                            <mat-label>Task End Date</mat-label>
+                            <input matInput [min]="endMinDate" [matDatepicker]="dp1" formControlName="end" disabled>
+                            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                            <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <label>Task Assign To *</label>
+                <mat-form-field  appearance="outline" class="form-element">
+                    <mat-label>Task Assign To</mat-label>
+                    <mat-select formControlName="assignto">
+                      <mat-option *ngFor="let food of user?.user" [value]="food.id">
+                        {{food.username}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            
+                <div class="form-element">
+                    <button mat-raised-button type="submit" class="button" [disabled]="!taskFormGroup.valid">Create Task</button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

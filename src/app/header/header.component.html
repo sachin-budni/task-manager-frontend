@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Task Manager</span>
+    <span class="example-spacer"></span>
+    <div class="grid column-gap-10 col-6">
+        <button mat-stroked-button routerLink="">Home</button>
+        <ng-container *ngIf="$user as user; else logout" class="grid gap-10">
+            <button mat-stroked-button routerLink="tasks">Tasks</button>
+            <ng-container *ngIf="$admin">
+                <button mat-stroked-button routerLink="add-task">Add</button>
+                <button mat-stroked-button routerLink="admin">Admin</button>
+            </ng-container>
+            <button (click)="remove()" mat-stroked-button>Logout</button>
+            <div class="profile-img">
+                <img [matMenuTriggerFor]="menu" [src]="user?.profilepic ? user?.profilepic : 'assets/boy.png'" alt="">
+            </div>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="profile">Profile</button>
+            </mat-menu>
+        </ng-container>
+        <ng-template #logout class="grid gap-10">
+            <button mat-stroked-button routerLink="login">Login</button>
+            <button mat-stroked-button routerLink="signup">Signup</button>
+        </ng-template>
+    </div>
+</mat-toolbar>
